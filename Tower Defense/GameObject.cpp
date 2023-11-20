@@ -61,3 +61,14 @@ void GameObject::Draw(sf::RenderWindow* oWindow)
 	if (m_sGraphism != nullptr)
 		oWindow->draw(*m_sGraphism);
 }
+
+bool GameObject::OverLap(float fX, float fY)
+{
+	if (Math::IsInsideInterval(fX, m_fX, m_fX + m_fSizeL) == false)
+		return false;
+
+	if (Math::IsInsideInterval(fY, m_fY, m_fY + m_fSizeH) == false)
+		return false;
+
+	return true;
+}

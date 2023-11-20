@@ -42,7 +42,6 @@ void GameManager::CreateTower()
     tTowers.push_back(tTempTower);
 
     cCases[iCaseIndex]->bIsFull = true;
-    iCaseIndex = NULL;
 }
 
 GameManager::GameManager() : oWindow(sf::VideoMode(1920, 1080), "Casse-Brique") // Calling RenderWindow constructor for our game window
@@ -51,7 +50,6 @@ GameManager::GameManager() : oWindow(sf::VideoMode(1920, 1080), "Casse-Brique") 
     bLost = false;
     bCanPlace = false;
     iRemainingBalls = 80;
-    iCaseIndex = NULL;
 
     CreateCases();
 }
@@ -85,7 +83,7 @@ void GameManager::CheckInsideCases()
 {
     for (int r = 0; r < cCases.size(); r++)
     {
-        if (Math::IsInsideInterval(vLocalPosition.x, cCases[r]->m_fX, cCases[r]->m_fX + cCases[r]->m_fSizeL) && Math::IsInsideInterval(vLocalPosition.x, cCases[r]->m_fY - cCases[r]->m_fSizeH/2, cCases[r]->m_fY + cCases[r]->m_fSizeH/2))
+        if (cCases[r]->OverLap(vLocalPosition.x, vLocalPosition.y))
         {
             if (cCases[r]->bIsFull == false)
             {
