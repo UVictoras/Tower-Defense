@@ -13,13 +13,17 @@ private:
 
 	sf::RenderWindow oWindow;
 
-	std::vector<Tower*> tTowers;
+	std::vector<Tower*> m_tTowers;
 
-	std::vector<Case*> cCases;
+	std::vector<Case*> m_cCases;
 
-	bool bWon, bLost, bCanPlace;
+	std::vector<PathCase*> m_pPath;
 
-	int iRemainingBalls, iCaseIndex;
+	Enemy* eEnemy;
+
+	bool m_bWon, m_bLost, m_bCanPlace;
+
+	int m_iRemainingBalls, m_iCaseIndex, m_iPathIndex;
 
 public:
 
@@ -43,9 +47,15 @@ public:
 
 	void GameLoop();
 
+	void CheckInsideCases();
+
+	void GetPathIndex();
+
+	// Creating Vectors
+
 	void CreateCases();
 	
-	void CheckInsideCases();
+	void CreatePath();
 
 	//Events
 

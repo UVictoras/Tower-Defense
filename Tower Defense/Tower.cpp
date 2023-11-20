@@ -1,6 +1,6 @@
 #include "Tower.h"
 
-Tower::Tower(float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor, const char* cFileName) : GameObject(fX, fY, fSizeL, fSizeH, cColor, cFileName)
+Tower::Tower(float fX, float fY, float fSizeW, float fSizeH, sf::Color cColor, const char* cFileName) : GameObject(fX, fY, fSizeW, fSizeH, cColor, cFileName)
 {
 	m_fAngle = 0.f;
 }

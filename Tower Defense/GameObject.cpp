@@ -8,7 +8,7 @@
 -----------------------------------------------------------------------
 */
 
-GameObject::GameObject(float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor)
+GameObject::GameObject(float fX, float fY, float fSizeW, float fSizeH, sf::Color cColor)
 {
 	m_fDirection.x = 10.f;
 	m_fDirection.y = -5.f;
@@ -17,14 +17,14 @@ GameObject::GameObject(float fX, float fY, float fSizeL, float fSizeH, sf::Color
 	m_fX = fX;
 	m_fY = fY;
 	m_fSizeH = fSizeH;
-	m_fSizeL = fSizeL;
+	m_fSizeW = fSizeW;
 
-	m_sGraphism = new sf::RectangleShape(sf::Vector2f(m_fSizeL, m_fSizeH));
+	m_sGraphism = new sf::RectangleShape(sf::Vector2f(m_fSizeW, m_fSizeH));
 	m_sGraphism->setPosition(m_fX, m_fY);
 	m_sGraphism->setFillColor(cColor);
 }
 
-GameObject::GameObject(float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor, const char* sFileName)
+GameObject::GameObject(float fX, float fY, float fSizeW, float fSizeH, sf::Color cColor, const char* sFileName)
 {
 	m_fDirection.x = 10.f;
 	m_fDirection.y = -5.f;
@@ -33,9 +33,9 @@ GameObject::GameObject(float fX, float fY, float fSizeL, float fSizeH, sf::Color
 	m_fX = fX;
 	m_fY = fY;
 	m_fSizeH = fSizeH;
-	m_fSizeL = fSizeL;
+	m_fSizeW = fSizeW;
 
-	m_sGraphism = new sf::RectangleShape(sf::Vector2f(m_fSizeL, m_fSizeH));
+	m_sGraphism = new sf::RectangleShape(sf::Vector2f(m_fSizeW, m_fSizeH));
 	m_sGraphism->setPosition(m_fX, m_fY);
 	TextureManager::Get()->CreateTexture(sFileName, &m_tTexture);
 	m_sGraphism->setTexture(&m_tTexture);
@@ -64,7 +64,7 @@ void GameObject::Draw(sf::RenderWindow* oWindow)
 
 bool GameObject::OverLap(float fX, float fY)
 {
-	if (Math::IsInsideInterval(fX, m_fX, m_fX + m_fSizeL) == false)
+	if (Math::IsInsideInterval(fX, m_fX, m_fX + m_fSizeW) == false)
 		return false;
 
 	if (Math::IsInsideInterval(fY, m_fY, m_fY + m_fSizeH) == false)

@@ -15,14 +15,14 @@ class GameObject
 {
 public:
 	float m_fX, m_fY;
-	float m_fSizeL, m_fSizeH, m_fRadius;
+	float m_fSizeW, m_fSizeH, m_fRadius;
 	sf::Vector2f m_fDirection;
 	sf::Shape* m_sGraphism;
 	sf::Texture m_tTexture;
 
-	GameObject(float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor);
+	GameObject(float fX, float fY, float fSizeW, float fSizeH, sf::Color cColor);
 	
-	GameObject(float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor, const char* sFileName);
+	GameObject(float fX, float fY, float fSizeW, float fSizeH, sf::Color cColor, const char* sFileName);
 
 	GameObject(float fX, float fY, float fRadius, sf::Color cColor);
 

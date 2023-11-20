@@ -131,20 +131,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Case.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="PathCase.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Tower.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Case.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="PathCase.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Tower.h" />
   </ItemGroup>

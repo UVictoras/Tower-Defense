@@ -5,7 +5,7 @@
 class Case : public GameObject
 {
 public:
-	bool bIsFull;
+	bool m_bIsFull;
 
-	Case(float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor);
+	Case(float fX, float fY, float fSizeW, float fSizeH, sf::Color cColor);
 };

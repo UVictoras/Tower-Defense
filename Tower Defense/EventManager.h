@@ -2,6 +2,7 @@
 #include <map>
 #include "Tower.h"
 #include "Case.h"
+#include "Enemy.h"
 
 typedef void(*func)();
 using namespace std;

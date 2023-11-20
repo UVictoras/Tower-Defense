@@ -11,7 +11,7 @@ private:
 	int m_iPrice;
 
 public:
-	Tower(float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor, const char* cFileName);
+	Tower(float fX, float fY, float fSizeW, float fSizeH, sf::Color cColor, const char* cFileName);
 
 	void Rotate(float fDeltaTime);
 };

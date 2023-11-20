@@ -1,6 +1,6 @@
 #include "Case.h"
 
-Case::Case(float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor) : GameObject(fX, fY, fSizeL, fSizeH, cColor)
+Case::Case(float fX, float fY, float fSizeW, float fSizeH, sf::Color cColor) : GameObject(fX, fY, fSizeW, fSizeH, cColor)
 {
-	bIsFull = false;
+	m_bIsFull = false;
 }
