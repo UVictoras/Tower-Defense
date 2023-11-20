@@ -5,10 +5,13 @@
 
 int main()
 {
-    EventManager::Initialize();
+    TextureManager::Initialize(); //Initializing TextureManager's singleton instance
+   
+    EventManager::Initialize(); //Initializing EventManager's singleton instance
+
     GameManager::Initialize(); //Initializing GameManager's singleton instance
 
     GameManager::Get()->GameLoop();
-
+    
     return 0;
 }

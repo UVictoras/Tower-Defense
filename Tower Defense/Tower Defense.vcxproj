@@ -130,18 +130,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Case.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Tower.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Case.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Tower.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

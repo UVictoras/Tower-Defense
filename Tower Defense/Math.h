@@ -10,4 +10,8 @@ namespace Math
 	float Rotate(GameObject* gGameObject, float vLocalPositionX, float vLocalPositionY);
 
 	bool IsInsideInterval(int v, int vMin, int vMax);
+
+	float RadToDeg(float fAngle);
+
+	float DegToRad(float fAngle);
 };

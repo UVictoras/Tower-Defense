@@ -28,7 +28,7 @@ EventManager::EventManager(func* event)
     AddComponent(sf::Event::EventType::MouseButtonPressed, sf::Mouse::Left, *event);
 }
 
-void EventManager::Update(sf::RenderWindow* oWindow, bool bCanShoot)
+void EventManager::Update(sf::RenderWindow* oWindow, bool bCanPlace)
 {
     //EVENT
     sf::Event oEvent;
@@ -37,10 +37,10 @@ void EventManager::Update(sf::RenderWindow* oWindow, bool bCanShoot)
         if (oEvent.type == sf::Event::Closed)
             oWindow->close();
 
-        if (bCanShoot)
+        if (bCanPlace)
         {
             ManageEvent(oEvent.type, oEvent.mouseButton.button);
-        }
+        }     
 
         ManageEvent(oEvent.type, oEvent.key.code);
     }

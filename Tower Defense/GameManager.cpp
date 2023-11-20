@@ -19,6 +19,11 @@ void EventCloseWindow()
     GameManager::Get()->CloseWindow();
 }
 
+void EventCreateTower()
+{
+    GameManager::Get()->CreateTower();
+}
+
 /*
 -----------------------------------------------------------------------
 |   Following are the methods corresponding to the GameManager Class  |
@@ -30,12 +35,25 @@ void GameManager::CloseWindow()
     oWindow.close();
 }
 
+void GameManager::CreateTower()
+{
+    Tower* tTempTower = new Tower(vLocalPosition.x-25.f, vLocalPosition.y-37.5f, 50.f, 75.f, sf::Color::White, "img/tower2.png");
+
+    tTowers.push_back(tTempTower);
+
+    cCases[iCaseIndex]->bIsFull = true;
+    iCaseIndex = NULL;
+}
+
 GameManager::GameManager() : oWindow(sf::VideoMode(1920, 1080), "Casse-Brique") // Calling RenderWindow constructor for our game window
 {
     bWon = false;
     bLost = false;
-    bCanShoot = true;
+    bCanPlace = false;
     iRemainingBalls = 80;
+    iCaseIndex = NULL;
+
+    CreateCases();
 }
 
 void GameManager::CheckWin()
@@ -51,41 +69,83 @@ void GameManager::CheckLose()
     }
 }
 
+void GameManager::CreateCases()
+{
+    Case* cTempCase = new Case(100.f, 100.f, 100.f, 100.f, sf::Color::Red);
+
+    cCases.push_back(cTempCase);
+
+    cTempCase = new Case(100.f, 600.f, 100.f, 100.f, sf::Color::Red);
+
+    cCases.push_back(cTempCase);
+
+}
+
+void GameManager::CheckInsideCases()
+{
+    for (int r = 0; r < cCases.size(); r++)
+    {
+        if (Math::IsInsideInterval(vLocalPosition.x, cCases[r]->m_fX, cCases[r]->m_fX + cCases[r]->m_fSizeL) && Math::IsInsideInterval(vLocalPosition.x, cCases[r]->m_fY - cCases[r]->m_fSizeH/2, cCases[r]->m_fY + cCases[r]->m_fSizeH/2))
+        {
+            if (cCases[r]->bIsFull == false)
+            {
+                bCanPlace = true;
+                iCaseIndex = r;
+            }
+        }
+    }
+}
+
 void GameManager::GameLoop()
 {
     sf::Clock oClock;
     float fDeltaTime = oClock.restart().asSeconds();
     sf::Clock clock;
     float fpsLimit = 1 / 120;
-    float fps = 0;
+    float fps = 120;
 
     EventManager::Get()->AddComponent(sf::Event::EventType::KeyPressed, sf::Keyboard::Key::Escape, &EventCloseWindow);
+    EventManager::Get()->AddComponent(sf::Event::EventType::MouseButtonPressed, sf::Mouse::Left, &EventCreateTower);
 
     //GameLoop
     while (oWindow.isOpen() && bWon == false && bLost == false)
     {
+        CheckInsideCases();
 
         //EVENT
-        EventManager::Get()->Update(&oWindow, bCanShoot);
+        EventManager::Get()->Update(&oWindow, bCanPlace);
 
         vLocalPosition = sf::Mouse::getPosition(oWindow);
 
         //DRAW
         oWindow.clear();
 
+        for (int q = 0; q < cCases.size(); q++)
+        {
+            cCases[q]->Draw(&oWindow);
+        }
+
+        if (tTowers.size() != 0)
+        {
+            for (int o = 0; o < tTowers.size(); o++)
+            {
+                tTowers[o]->Draw(&oWindow);
+            }
+        }
+
         oWindow.display();
         fDeltaTime = oClock.restart().asSeconds();
         if (fDeltaTime < fpsLimit)
         {
+            fps = 1.f / (fpsLimit - fDeltaTime);
             sf::sleep(sf::seconds(fpsLimit - fDeltaTime));
-            fDeltaTime += fpsLimit - fDeltaTime;
+            //fDeltaTime += fpsLimit - fDeltaTime;
         }
-        fps = 1.f / fDeltaTime;
-        cout << "fps :" << fps << endl;
+        cout << "fps :" << fps  << endl;
 
-        CheckWin();
+        //CheckWin();
         CheckLose();
 
-        bCanShoot = false;
+        bCanPlace = false;
     }
 }

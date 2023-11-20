@@ -1,4 +1,6 @@
 #pragma once
+#include "Math.h"
+#include "TextureManager.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
@@ -12,15 +14,17 @@ namespace sf
 class GameObject
 {
 public:
-	bool m_bType;
 	float m_fX, m_fY;
-	float m_fSizeL, m_fSizeH;
+	float m_fSizeL, m_fSizeH, m_fRadius;
 	sf::Vector2f m_fDirection;
 	sf::Shape* m_sGraphism;
+	sf::Texture m_tTexture;
 
-	GameObject();
+	GameObject(float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor);
+	
+	GameObject(float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor, const char* sFileName);
 
-	GameObject(bool bType, float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor);
+	GameObject(float fX, float fY, float fRadius, sf::Color cColor);
 
 	void Draw(sf::RenderWindow* oWindow);
 };

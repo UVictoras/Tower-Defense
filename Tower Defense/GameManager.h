@@ -1,6 +1,5 @@
 #pragma once
 #include "EventManager.h"
-#include "Tower.h"
 
 typedef void(*func)();
 using namespace std;
@@ -14,9 +13,13 @@ private:
 
 	sf::RenderWindow oWindow;
 
-	bool bWon, bLost, bCanShoot;
+	std::vector<Tower*> tTowers;
 
-	int iRemainingBalls;
+	std::vector<Case*> cCases;
+
+	bool bWon, bLost, bCanPlace;
+
+	int iRemainingBalls, iCaseIndex;
 
 public:
 
@@ -40,7 +43,13 @@ public:
 
 	void GameLoop();
 
+	void CreateCases();
+	
+	void CheckInsideCases();
+
 	//Events
 
 	void CloseWindow();
+
+	void CreateTower();
 };
