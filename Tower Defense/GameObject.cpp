@@ -1,6 +1,5 @@
 #include <iostream>
 #include "GameObject.h"
-#include "Math.h"
 #include <SFML/Graphics.hpp>
 
 GameObject::GameObject()

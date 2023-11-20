@@ -1,6 +1,6 @@
 #pragma once
 #include "EventManager.h"
-#include "GameObject.h"
+#include "Tower.h"
 
 typedef void(*func)();
 using namespace std;
