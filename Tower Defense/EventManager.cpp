@@ -23,6 +23,11 @@ EventManager::EventManager()
 
 }
 
+EventManager::EventManager(func* event)
+{
+    AddComponent(sf::Event::EventType::MouseButtonPressed, sf::Mouse::Left, *event);
+}
+
 void EventManager::Update(sf::RenderWindow* oWindow, bool bCanShoot)
 {
     //EVENT
@@ -39,11 +44,6 @@ void EventManager::Update(sf::RenderWindow* oWindow, bool bCanShoot)
 
         ManageEvent(oEvent.type, oEvent.key.code);
     }
-}
-
-EventManager::EventManager(func* event)
-{
-    AddComponent(sf::Event::EventType::MouseButtonPressed, sf::Mouse::Left, *event);
 }
 
 void EventManager::ManageEvent(sf::Event::EventType eType, sf::Mouse::Button mousePressed)
