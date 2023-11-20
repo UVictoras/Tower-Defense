@@ -75,9 +75,9 @@ void GameManager::CreateCases()
 
     cCases.push_back(cTempCase);
 
-    cTempCase = new Case(100.f, 600.f, 100.f, 100.f, sf::Color::Red);
+    Case* cTempCase2 = new Case(100.f, 600.f, 100.f, 100.f, sf::Color::Red);
 
-    cCases.push_back(cTempCase);
+    cCases.push_back(cTempCase2);
 
 }
 
@@ -141,7 +141,8 @@ void GameManager::GameLoop()
             sf::sleep(sf::seconds(fpsLimit - fDeltaTime));
             //fDeltaTime += fpsLimit - fDeltaTime;
         }
-        cout << "fps :" << fps  << endl;
+        cout << cCases.size();
+        //cout << "fps :" << fps  << endl;
 
         //CheckWin();
         CheckLose();
