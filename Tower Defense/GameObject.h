@@ -29,4 +29,6 @@ public:
 	void Draw(sf::RenderWindow* oWindow);
 
 	bool OverLap(float fX, float fY);
+
+	void ChangeDirection(sf::Vector2f localPosition);
 };

@@ -11,3 +11,21 @@ void Tower::Rotate(float fDeltaTime)
 	if (m_fAngle > Math::DegToRad(360.f))
 		m_fAngle -= Math::DegToRad(360.f);
 }
+
+void Tower::Shoot(float fX, float fY) 
+{
+	m_pProjectiles.push_back(new Projectile(m_fX + m_fSizeW / 2 - 15.f, m_fY - m_fSizeH * 0.000001f, 15.f, sf::Color::Green));
+
+	m_pProjectiles[m_pProjectiles.size() - 1]->ChangeDirection({fX, fY});
+}
+
+void Tower::DeleteProjectile()
+{
+	for (int z = 0; z < m_pProjectiles.size(); z++)
+	{
+		if (m_pProjectiles[z]->m_sGraphism == nullptr)
+		{
+			m_pProjectiles.erase(m_pProjectiles.begin() + z);
+		}
+	}
+}

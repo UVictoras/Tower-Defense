@@ -4,5 +4,11 @@
 class Projectile : public GameObject
 {
 public:
-	Projectile(float fX, float fY, float fSizeW, float fSizeH, sf::Color cColor);
+	float m_fSpeed;
+
+	bool m_bHit;
+
+	Projectile(float fX, float fY, float fSizeRadius, sf::Color cColor);
+
+	void Move(float fDeltaTime, float fX, float fY);
 };

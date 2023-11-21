@@ -72,3 +72,10 @@ bool GameObject::OverLap(float fX, float fY)
 
 	return true;
 }
+
+void GameObject::ChangeDirection(sf::Vector2f localPosition)
+{
+	m_fDirection.x = localPosition.x - m_fX;
+	m_fDirection.y = localPosition.y - m_fY;
+	Math::Normalize(&m_fDirection.x, &m_fDirection.y);
+}

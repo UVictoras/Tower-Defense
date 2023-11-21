@@ -19,7 +19,9 @@ private:
 
 	std::vector<PathCase*> m_pPath;
 
-	Enemy* eEnemy;
+	Enemy* m_eEnemiesList[10];
+
+	std::vector<Enemy*> m_eEnemies;
 
 	bool m_bWon, m_bLost, m_bCanPlace;
 
@@ -50,6 +52,12 @@ public:
 	void CheckInsideCases();
 
 	void GetPathIndex();
+
+	// Delete Broken Objects
+
+	void CheckDeadEnemy();
+
+	void CheckEmptyProjectiles();
 
 	// Creating Vectors
 
