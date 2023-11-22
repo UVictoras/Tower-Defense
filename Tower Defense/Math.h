@@ -9,9 +9,13 @@ namespace Math
 
 	float Rotate(GameObject* gGameObject, float vLocalPositionX, float vLocalPositionY);
 
-	bool IsInsideInterval(int v, int vMin, int vMax);
+	bool IsInsideInterval(float v, float vMin, float vMax);
 
 	float RadToDeg(float fAngle);
 
 	float DegToRad(float fAngle);
+
+	bool IsInsideRange(float fCenterX, float fCenterY, float fX, float fY, float fRadius);
+
+	float CalculateDistance(float fCenterX, float fCenterY, float fX, float fY);
 };

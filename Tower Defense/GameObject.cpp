@@ -56,6 +56,22 @@ GameObject::GameObject(float fX, float fY, float fRadius, sf::Color cColor)
 	m_sGraphism->setFillColor(cColor);
 }
 
+GameObject::GameObject(float fX, float fY, float fRadius, sf::Color cColor, const char* sFileName)
+{
+	m_fDirection.x = 10.f;
+	m_fDirection.y = -5.f;
+	Math::Normalize(&m_fDirection.x, &m_fDirection.y);
+
+	m_fX = fX;
+	m_fY = fY;
+	m_fRadius = fRadius;
+
+	m_sGraphism = new sf::CircleShape(m_fRadius);
+	m_sGraphism->setPosition(m_fX, m_fY);
+	TextureManager::Get()->CreateTexture(sFileName, &m_tTexture);
+	m_sGraphism->setTexture(&m_tTexture);
+}
+
 void GameObject::Draw(sf::RenderWindow* oWindow)
 {
 	if (m_sGraphism != nullptr)

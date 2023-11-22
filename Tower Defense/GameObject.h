@@ -26,6 +26,8 @@ public:
 
 	GameObject(float fX, float fY, float fRadius, sf::Color cColor);
 
+	GameObject(float fX, float fY, float fRadius, sf::Color cColor, const char* sFileName);
+
 	void Draw(sf::RenderWindow* oWindow);
 
 	bool OverLap(float fX, float fY);

@@ -41,6 +41,10 @@ public:
 
 public:
 
+    float m_fClosestEnemy;
+
+	int m_iClosestEnemyIndex;
+
 	GameManager();
 
 	void CheckWin();

@@ -8,7 +8,9 @@ public:
 
 	bool m_bHit;
 
-	Projectile(float fX, float fY, float fSizeRadius, sf::Color cColor);
+	int m_iEnemyIndex;
 
-	void Move(float fDeltaTime, float fX, float fY);
+	Projectile(float fX, float fY, float fSizeRadius, sf::Color cColor, int iClosestEnemyIndex, const char* cFileName);
+
+	void Move(float fDeltaTime, sf::Vector2f fDirection);
 };

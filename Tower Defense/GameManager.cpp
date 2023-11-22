@@ -71,7 +71,7 @@ void GameManager::CloseWindow()
 
 void GameManager::CreateTower()
 {
-    Tower* tTempTower = new Tower(m_cCases[m_iCaseIndex]->m_fX + m_cCases[m_iCaseIndex]->m_fSizeW / 8, m_cCases[m_iCaseIndex]->m_fY - m_cCases[m_iCaseIndex]->m_fSizeH / 2, 75.f, 130.f, sf::Color::White, "img/tower2.png");
+    Tower* tTempTower = new Tower(m_cCases[m_iCaseIndex]->m_fX + m_cCases[m_iCaseIndex]->m_fSizeW / 8, m_cCases[m_iCaseIndex]->m_fY - m_cCases[m_iCaseIndex]->m_fSizeH / 2, 75.f, 130.f, sf::Color::White, "img/tower2.png", 500.f);
 
     m_tTowers.push_back(tTempTower);
 
@@ -84,8 +84,12 @@ GameManager::GameManager() : oWindow(sf::VideoMode(1920, 1080), "Casse-Brique") 
     m_bLost = false;
     m_bCanPlace = false;
     m_iRemainingBalls = 80;
+    m_fClosestEnemy = 0.f;
+    m_iClosestEnemyIndex = 0;
 
-    m_eEnemies.push_back(new Enemy(0.f, 661.f, 48.f, 48.f, sf::Color::Yellow));
+	m_eEnemies.push_back(new Enemy(-50.f, 661.f, 48.f, 48.f, sf::Color::Yellow));
+	m_eEnemies.push_back(new Enemy(-125.f, 661.f, 48.f, 48.f, sf::Color::Yellow));
+	m_eEnemies.push_back(new Enemy(-200.f, 661.f, 48.f, 48.f, sf::Color::Yellow));
 
     CreateCases();
     CreatePath();
@@ -121,9 +125,12 @@ void GameManager::CheckInsideCases()
 
 void GameManager::CheckDeadEnemy()
 {
-    if (m_eEnemies[0]->m_sGraphism == nullptr)
+    for (int s = 0; s < m_eEnemies.size(); s++)
     {
-        return;
+        if (m_eEnemies[s]->m_sGraphism == nullptr)
+        {
+            m_eEnemies.erase(m_eEnemies.begin() + s);
+        }
     }
 }
 
@@ -132,8 +139,11 @@ void GameManager::CheckEmptyProjectiles()
     for (int a = 0; a < m_tTowers.size(); a++)
     {
         for (int ç = 0; ç < m_tTowers[a]->m_pProjectiles.size(); ç++)
-        {
-            m_eEnemies[0]->Hit(m_tTowers[a]->m_pProjectiles[ç]);
+		{
+            for (int i = 0; i < m_eEnemies.size(); i++)
+            {
+                m_eEnemies[i]->Hit(m_tTowers[a]->m_pProjectiles[ç]);
+            }
         }
         m_tTowers[a]->DeleteProjectile();
     }
@@ -143,10 +153,13 @@ void GameManager::GetPathIndex()
 {
     for (int $ = 0; $ < m_pPath.size(); $++)
     {
-        if (m_pPath[$]->OverLap(m_eEnemies[0]->m_fX, m_eEnemies[0]->m_fY))
+        for (int i = 0; i < m_eEnemies.size(); i++)
         {
-            m_iPathIndex = $;
-            return;
+            if (m_pPath[$]->OverLap(m_eEnemies[i]->m_fX, m_eEnemies[i]->m_fY))
+            {
+                m_iPathIndex = $;
+                return;
+            }
         }
     }
 }
@@ -166,38 +179,54 @@ void GameManager::GameLoop()
         GetPathIndex();
         CheckInsideCases();
 
-        if (m_eEnemies[0]->m_sGraphism != nullptr)
+        for (int i = 0; i < m_eEnemies.size(); i++)
         {
-            m_eEnemies[0]->MoveAlongPath(m_pPath[m_iPathIndex], fDeltaTime);
-            m_eEnemies[0]->Die();
+            if (m_eEnemies[i]->m_sGraphism != nullptr)
+            {
+                m_eEnemies[i]->MoveAlongPath(m_pPath[m_iPathIndex], fDeltaTime);
+                m_eEnemies[i]->Die();
+            }
         }
+
+        CheckDeadEnemy();
 
         //EVENT
         EventManager::Get()->Update(&oWindow, m_bCanPlace);
 
         CheckEmptyProjectiles();
-
+        
         vLocalPosition = sf::Mouse::getPosition(oWindow);
         for (int ù = 0; ù < m_tTowers.size(); ù++)
         {
-			m_tTowers[ù]->fTimeElapsed += fDeltaTime;
-
-            if (m_tTowers[ù]->fTimeElapsed >= m_tTowers[ù]->fDelay){
-
-				m_tTowers[ù]->fTimeElapsed = 0;
-                if (m_eEnemies[0]->m_sGraphism != nullptr)
-                    m_tTowers[ù]->Shoot(m_eEnemies[0]->m_fX + m_eEnemies[0]->m_fSizeW, m_eEnemies[0]->m_fY + m_eEnemies[0]->m_fSizeH);
+			m_tTowers[ù]->m_fTimeElapsed += fDeltaTime;
+            
+            if (m_tTowers[ù]->m_fTimeElapsed >= m_tTowers[ù]->m_fDelay)
+			{
+				m_iClosestEnemyIndex = -1;
+                m_tTowers[ù]->m_fTimeElapsed = 0; 
+                for (int i = 0; i < m_eEnemies.size(); i++)
+                {
+                    if (m_eEnemies[i]->m_sGraphism != nullptr && Math::IsInsideRange(m_tTowers[ù]->m_fX + m_tTowers[ù]->m_fSizeW/2, m_tTowers[ù]->m_fY - m_tTowers[ù]->m_fSizeH / 2, m_eEnemies[i]->m_fX + m_eEnemies[i]->m_fSizeW/2, m_eEnemies[i]->m_fY - m_eEnemies[i]->m_fSizeH/2, m_tTowers[ù]->m_fRadius))
+                    {
+						m_iClosestEnemyIndex = i;
+                        break;
+                    }
+                }
+                if (m_iClosestEnemyIndex != -1)
+                {
+                    m_tTowers[ù]->Shoot(m_eEnemies[m_iClosestEnemyIndex]->m_fX + m_eEnemies[m_iClosestEnemyIndex]->m_fSizeW, m_eEnemies[m_iClosestEnemyIndex]->m_fY + m_eEnemies[m_iClosestEnemyIndex]->m_fSizeH, m_iClosestEnemyIndex);
+                }
             }
 
             if (m_tTowers[ù]->m_pProjectiles.size() != 0)
             {
                 for (int µ = 0; µ < m_tTowers[ù]->m_pProjectiles.size(); µ++)
                 {
-                    m_tTowers[ù]->m_pProjectiles[µ]->Move(fDeltaTime, m_eEnemies[0]->m_fX, m_eEnemies[0]->m_fY);
+                    m_tTowers[ù]->m_pProjectiles[µ]->Move(fDeltaTime, sf::Vector2f{ m_eEnemies[m_tTowers[ù]->m_pProjectiles[µ]->m_iEnemyIndex]->m_fX, m_eEnemies[m_tTowers[ù]->m_pProjectiles[µ]->m_iEnemyIndex]->m_fY });
                 }
             }
         }
-
+        
         //DRAW
         oWindow.clear();
 
@@ -229,9 +258,11 @@ void GameManager::GameLoop()
 				m_tTowers[à]->m_pProjectiles[è]->Draw(&oWindow);
             }
 		}
-        
-        if (m_eEnemies[0]->m_sGraphism != nullptr)
-            m_eEnemies[0]->Draw(&oWindow);
+        for (int i = 0; i < m_eEnemies.size(); i++)
+        {
+            if (m_eEnemies[i]->m_sGraphism != nullptr)
+                m_eEnemies[i]->Draw(&oWindow);
+        }
 
         oWindow.display();
         fDeltaTime = oClock.restart().asSeconds();
@@ -240,6 +271,5 @@ void GameManager::GameLoop()
         CheckLose();
 
         m_bCanPlace = false;
-        cout << m_eEnemies[0]->m_iHP << endl;
     }
 }
