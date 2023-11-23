@@ -1,11 +1,12 @@
 #include "Tower.h"
 
-Tower::Tower(float fX, float fY, float fSizeW, float fSizeH, sf::Color cColor, const char* cFileName, float fRadius) : GameObject(fX, fY, fSizeW, fSizeH, cColor, cFileName)
+Tower::Tower(float fX, float fY, float fSizeW, float fSizeH, sf::Color cColor, const char* cFileName, float fRadius, int iDamage, float fDelay) : GameObject(fX, fY, fSizeW, fSizeH, cColor, cFileName)
 {
 	m_fAngle = 0.f;
-	m_fDelay = 0.5f;
+	m_fDelay = fDelay;
 	m_fTimeElapsed = 0;
 	m_fRadius = fRadius;
+	m_iDamage = iDamage;
 }
 
 void Tower::Rotate(float fDeltaTime)

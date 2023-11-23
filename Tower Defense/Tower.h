@@ -10,15 +10,14 @@ private:
 
 	float m_fAngle;
 
-	int m_iPrice;
-
-
 public:
 	float m_fDelay, m_fTimeElapsed, m_fRadius;
 
+	int m_iDamage;
+
 	std::vector<Projectile*> m_pProjectiles;
 
-	Tower(float fX, float fY, float fSizeW, float fSizeH, sf::Color cColor, const char* cFileName, float fRadius);
+	Tower(float fX, float fY, float fSizeW, float fSizeH, sf::Color cColor, const char* cFileName, float fRadius, int iDamage, float fDelay);
 
 	void Rotate(float fDeltaTime);
 

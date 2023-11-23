@@ -12,17 +12,18 @@ public:
 		
 	bool iImmunePhysical;
 
-	Enemy(float fX, float fY, float fSizeW, float fSizeH, sf::Color cColor);
+	Enemy(float fX, float fY, float fSizeW, float fSizeH, sf::Color cColor, const char* sFileName, int iLife);
 
 	void MoveAlongPath(PathCase* pPathCase, float fDeltaTime);
 
-	void TakeDamage(Projectile* pProjectile);
+	void TakeDamage(Projectile* pProjectile, int iDamage);
 
-	void Hit(Projectile* pProjectile);
+	void Hit(Projectile* pProjectile, int iDamage);
 
 	void StartMove(float fDeltaTime);
 
 	void Die();
 
     bool HitCastle();
+	void Move(float fDeltaTime);
 };

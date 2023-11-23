@@ -23,9 +23,11 @@ private:
 
 	std::vector<Enemy*> m_eEnemies;
 
+	std::vector<int> m_iTowerPrice;
+
 	bool m_bWon, m_bLost, m_bCanPlace;
 
-	int m_iBaseLife, m_iCaseIndex;
+	int m_iBaseLife, m_iCaseIndex, m_iMoney, m_iTowerIndex;
 
 public:
 
@@ -76,4 +78,10 @@ public:
 	void CloseWindow();
 
 	void CreateTower();
+
+	void ChooseTower1();
+
+	void ChooseTower2();
+
+	void ChooseTower3();
 };
