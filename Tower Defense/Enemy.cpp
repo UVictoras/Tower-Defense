@@ -4,6 +4,7 @@ Enemy::Enemy(float fX, float fY, float fSizeW, float fSizeH, sf::Color cColor) :
 {
 	m_fSpeed = 10.f;
 	m_iHP = 10;
+	m_iPathIndex = -1;
 }
 
 void Enemy::MoveAlongPath(PathCase* cPathCase, float fDeltaTime)
@@ -21,6 +22,7 @@ void Enemy::MoveAlongPath(PathCase* cPathCase, float fDeltaTime)
 		else
 		{
 			m_fX += 10.f * m_fSpeed * fDeltaTime;
+			m_iPathIndex++;
 		}	
 	}
 	else if (cPathCase->m_cDirection == 'T') // Top
@@ -36,6 +38,7 @@ void Enemy::MoveAlongPath(PathCase* cPathCase, float fDeltaTime)
 		else
 		{
 			m_fY -= 10.f * m_fSpeed * fDeltaTime;
+			m_iPathIndex++;
 		}	
 	}
 	else if (cPathCase->m_cDirection == 'D') // Down
@@ -51,6 +54,7 @@ void Enemy::MoveAlongPath(PathCase* cPathCase, float fDeltaTime)
 		else
 		{
 			m_fY += 10.f * m_fSpeed * fDeltaTime;
+			m_iPathIndex++;
 		}
 	}
 	else if (cPathCase->m_cDirection == 'L') // Left
@@ -65,6 +69,7 @@ void Enemy::MoveAlongPath(PathCase* cPathCase, float fDeltaTime)
 		}
 		{
 			m_fX -= 10.f * m_fSpeed * fDeltaTime;
+			m_iPathIndex++;
 		}	
 	}
 	m_sGraphism->setPosition(m_fX, m_fY);
@@ -85,10 +90,25 @@ void Enemy::Hit(Projectile* pProjectile)
 	}
 }
 
+void Enemy::StartMove(float fDeltaTime)
+{
+	m_fX += 5.f * m_fSpeed * fDeltaTime;
+}
+
 void Enemy::Die()
 {
 	if (m_iHP <= 0)
 	{
 		m_sGraphism = nullptr;
 	}
+}
+
+bool Enemy::HitCastle()
+{
+    if (m_fX >= 1920)
+    {
+        m_sGraphism = nullptr;
+		return true;
+    }
+	return false;
 }

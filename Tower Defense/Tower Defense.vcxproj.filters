@@ -13,72 +13,90 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Controller">
+      <UniqueIdentifier>{c87587c0-ac5c-4bd8-a5d5-4c4b3df77917}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Controller">
+      <UniqueIdentifier>{3e8b6140-0b34-4f50-8ed6-f731f3dd4372}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Model">
+      <UniqueIdentifier>{1fe03df5-4c5c-43ea-96a3-2228517f5a13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Model">
+      <UniqueIdentifier>{f133c08f-1201-4037-af04-f581a62846da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\View">
+      <UniqueIdentifier>{0eb1aa67-2535-4479-9971-fd4947cc97f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\View">
+      <UniqueIdentifier>{dd90e49a-c760-4bfb-a40f-3db84319a773}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="EventManager.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Controller</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Math.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Tower.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Case.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Controller</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Controller</Filter>
     </ClCompile>
-    <ClCompile Include="PathCase.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="Case.cpp">
+      <Filter>Fichiers sources\Model</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Fichiers sources\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="PathCase.cpp">
+      <Filter>Fichiers sources\Model</Filter>
     </ClCompile>
     <ClCompile Include="Projectile.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Tower.cpp">
+      <Filter>Fichiers sources\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Fichiers sources\View</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EventManager.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Controller</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Math.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Tower.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Case.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Controller</Filter>
     </ClInclude>
     <ClInclude Include="TextureManager.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Controller</Filter>
     </ClInclude>
-    <ClInclude Include="PathCase.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="Case.h">
+      <Filter>Fichiers d%27en-tête\Model</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Fichiers d%27en-tête\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="PathCase.h">
+      <Filter>Fichiers d%27en-tête\Model</Filter>
     </ClInclude>
     <ClInclude Include="Projectile.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Tower.h">
+      <Filter>Fichiers d%27en-tête\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Fichiers d%27en-tête\View</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

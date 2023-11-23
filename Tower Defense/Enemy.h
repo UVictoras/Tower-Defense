@@ -8,7 +8,7 @@ class Enemy : public GameObject
 public:
 	float m_fSpeed;
 
-	int m_iHP;
+	int m_iHP, m_iPathIndex;
 		
 	bool iImmunePhysical;
 
@@ -20,5 +20,9 @@ public:
 
 	void Hit(Projectile* pProjectile);
 
+	void StartMove(float fDeltaTime);
+
 	void Die();
+
+    bool HitCastle();
 };

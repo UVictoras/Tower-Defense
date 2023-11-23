@@ -32,14 +32,44 @@ void EventCreateTower()
 
 void GameManager::CreateCases()
 {
-    Case* cTempCase = new Case(100.f, 100.f, 100.f, 100.f, sf::Color::Red);
+    Case* cTempCase = new Case(54.f, 48.f, 150.f, 118.f, sf::Color::Red);
 
     m_cCases.push_back(cTempCase);
 
     
-    Case* cTempCase2 = new Case(200.f, 500.f, 100.f, 100.f, sf::Color::Red);
+    Case* cTempCase2 = new Case(452.f, 158.f, 150.f, 118.f, sf::Color::Red);
 
-    m_cCases.push_back(cTempCase2);
+	m_cCases.push_back(cTempCase2);
+
+
+	Case* cTempCase3 = new Case(53.f, 578.f, 150.f, 118.f, sf::Color::Red);
+
+	m_cCases.push_back(cTempCase3);
+
+
+	Case* cTempCase4 = new Case(147.f, 868.f, 150.f, 118.f, sf::Color::Red);
+
+	m_cCases.push_back(cTempCase4);
+
+
+	Case* cTempCase5 = new Case(1753.f, 65.f, 150.f, 118.f, sf::Color::Red);
+
+	m_cCases.push_back(cTempCase5);
+
+
+	Case* cTempCase6 = new Case(1666.f, 358.f, 150.f, 118.f, sf::Color::Red);
+
+	m_cCases.push_back(cTempCase6);
+
+
+	Case* cTempCase7 = new Case(1666.f, 642.f, 150.f, 118.f, sf::Color::Red);
+
+	m_cCases.push_back(cTempCase7);
+
+
+	Case* cTempCase8 = new Case(1753.f, 936.f, 150.f, 118.f, sf::Color::Red);
+
+	m_cCases.push_back(cTempCase8);
     
 
 }
@@ -48,12 +78,49 @@ void GameManager::CreatePath()
 {
     PathCase* cTempPath;
 
-    for (int b = 0; b < 4; b++)
+    for (int b = 0; b < 6; b++)
     {
-        if (b == 3)
-            cTempPath = new PathCase(192.f * b, 600.f, 192.f, 192.f, sf::Color::Blue, 'T');
+        if (b == 5)
+            cTempPath = new PathCase(192.f * b, 325.f, 192.f, 192.f, sf::Color::Blue, 'T');
         else 
-            cTempPath = new PathCase(192.f * b, 600.f, 192.f, 192.f, sf::Color::Blue, 'R');
+            cTempPath = new PathCase(192.f * b, 325.f, 192.f, 192.f, sf::Color::Blue, 'R');
+        m_pPath.push_back(cTempPath);
+    }
+
+    for (int j = 0; j < 2; j++)
+    {
+        if (j == 1)
+            cTempPath = new PathCase(960.f, 325.f - 90.f - 192.f, 192.f, 192.f, sf::Color::Blue, 'L');
+        else
+            cTempPath = new PathCase(960.f, 325.f - 90.f, 192.f, 90.f, sf::Color::Blue, 'T');
+
+        m_pPath.push_back(cTempPath);
+    }
+
+    for (int p = 0; p < 2; p++)
+    {
+        if (p == 1)
+            cTempPath = new PathCase(960.f - 90.f - 192.f, 38.f, 192.f, 192.f, sf::Color::Blue, 'D');
+        else
+            cTempPath = new PathCase(960.f - 90.f, 38.f, 90.f, 192.f, sf::Color::Blue, 'L');
+        m_pPath.push_back(cTempPath);
+    }
+
+    for (int y = 0; y < 7; y++)
+    {
+        if (y % 2 == 0)
+        {
+            if (y == 6)
+            {
+                cTempPath = new PathCase(678.f, 38.f + 192.f * (y+1) - 102.f * (y+1), 192.f, 192.f, sf::Color::Blue, 'L');
+            }
+            else 
+                cTempPath = new PathCase(678.f, 38.f + 192.f * (y + 1) - 90.f * (y + 1), 192.f, 192.f, sf::Color::Blue, 'D');
+        }
+        else
+        {
+            cTempPath = new PathCase(678.f, 38.f + 192.f * (y + 1) - 90.f * (y + 1), 90.f, 90.f, sf::Color::Blue, 'D');
+        }
         m_pPath.push_back(cTempPath);
     }
 }
@@ -71,7 +138,7 @@ void GameManager::CloseWindow()
 
 void GameManager::CreateTower()
 {
-    Tower* tTempTower = new Tower(m_cCases[m_iCaseIndex]->m_fX + m_cCases[m_iCaseIndex]->m_fSizeW / 8, m_cCases[m_iCaseIndex]->m_fY - m_cCases[m_iCaseIndex]->m_fSizeH / 2, 75.f, 130.f, sf::Color::White, "img/tower2.png", 500.f);
+    Tower* tTempTower = new Tower(m_cCases[m_iCaseIndex]->m_fX + m_cCases[m_iCaseIndex]->m_fSizeW / 4, m_cCases[m_iCaseIndex]->m_fY - m_cCases[m_iCaseIndex]->m_fSizeH / 3, 75.f, 130.f, sf::Color::White, "img/tower2.png", 500.f);
 
     m_tTowers.push_back(tTempTower);
 
@@ -83,13 +150,15 @@ GameManager::GameManager() : oWindow(sf::VideoMode(1920, 1080), "Casse-Brique") 
     m_bWon = false;
     m_bLost = false;
     m_bCanPlace = false;
-    m_iRemainingBalls = 80;
+	m_iBaseLife = 10;
     m_fClosestEnemy = 0.f;
     m_iClosestEnemyIndex = 0;
 
-	m_eEnemies.push_back(new Enemy(-50.f, 661.f, 48.f, 48.f, sf::Color::Yellow));
-	m_eEnemies.push_back(new Enemy(-125.f, 661.f, 48.f, 48.f, sf::Color::Yellow));
-	m_eEnemies.push_back(new Enemy(-200.f, 661.f, 48.f, 48.f, sf::Color::Yellow));
+    gBackground = new GameObject(0.f, 0.f, 1920.f, 1080.f, sf::Color::White, "img/map.png");
+
+	m_eEnemies.push_back(new Enemy(-50.f, 390.f, 48.f, 48.f, sf::Color::Yellow));
+	m_eEnemies.push_back(new Enemy(-250.f, 390.f, 48.f, 48.f, sf::Color::Yellow));
+	m_eEnemies.push_back(new Enemy(-450.f, 390.f, 48.f, 48.f, sf::Color::Yellow));
 
     CreateCases();
     CreatePath();
@@ -97,12 +166,15 @@ GameManager::GameManager() : oWindow(sf::VideoMode(1920, 1080), "Casse-Brique") 
 
 void GameManager::CheckWin()
 {
-    m_bWon = true;
+    if (m_eEnemies.size() == 0)
+    {
+        m_bWon = true;
+    }
 }
 
 void GameManager::CheckLose()
 {
-    if (m_iRemainingBalls == 0)
+    if (m_iBaseLife == 0)
     {
         m_bLost = true;
     }
@@ -155,10 +227,13 @@ void GameManager::GetPathIndex()
     {
         for (int i = 0; i < m_eEnemies.size(); i++)
         {
-            if (m_pPath[$]->OverLap(m_eEnemies[i]->m_fX, m_eEnemies[i]->m_fY))
+            if (m_eEnemies[i]->m_iPathIndex == -1)
             {
-                m_iPathIndex = $;
-                return;
+                if (m_pPath[$]->OverLap(m_eEnemies[i]->m_fX, m_eEnemies[i]->m_fY) && m_eEnemies[i]->m_fX >= 0)
+                {
+                    m_eEnemies[i]->m_iPathIndex = $;
+                    return;
+                }
             }
         }
     }
@@ -181,11 +256,17 @@ void GameManager::GameLoop()
 
         for (int i = 0; i < m_eEnemies.size(); i++)
         {
-            if (m_eEnemies[i]->m_sGraphism != nullptr)
+            if (m_eEnemies[i]->m_sGraphism != nullptr && m_eEnemies[i]->m_iPathIndex != -1)
             {
-                m_eEnemies[i]->MoveAlongPath(m_pPath[m_iPathIndex], fDeltaTime);
+                m_eEnemies[i]->MoveAlongPath(m_pPath[m_eEnemies[i]->m_iPathIndex], fDeltaTime);
                 m_eEnemies[i]->Die();
+                if (m_eEnemies[i]->HitCastle())
+                {
+                    m_iBaseLife -= 1;
+                }
             }
+            if (m_eEnemies[i]->m_fX < 0)
+                m_eEnemies[i]->StartMove(fDeltaTime);
         }
 
         CheckDeadEnemy();
@@ -229,6 +310,8 @@ void GameManager::GameLoop()
         
         //DRAW
         oWindow.clear();
+
+        gBackground->Draw(&oWindow);
 
         for (int q = 0; q < m_cCases.size(); q++)
         {

@@ -25,7 +25,7 @@ private:
 
 	bool m_bWon, m_bLost, m_bCanPlace;
 
-	int m_iRemainingBalls, m_iCaseIndex, m_iPathIndex;
+	int m_iBaseLife, m_iCaseIndex;
 
 public:
 
@@ -44,6 +44,8 @@ public:
     float m_fClosestEnemy;
 
 	int m_iClosestEnemyIndex;
+
+	GameObject* gBackground;
 
 	GameManager();
 
